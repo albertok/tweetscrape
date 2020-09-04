@@ -25,14 +25,17 @@ def fetch(sc):
     soup = BeautifulSoup(html, "html.parser")
     tweets = soup.find_all("div", attrs={"class":"tweet-text"})
 
+    #For each tweet scraped store in collected.
     for tweet in tweets:
         tweet_text = tweet.find('div',{"class":'dir-ltr'}).text.strip()
+        #Keep interating till we come across a tweet we already have.
         if tweet_text in collected:
             break
         collected.append(tweet_text)
         print(tweet_text)
         print("----")
 
+        #On initial run print first 5
         if len(collected) == 5:
             break
 
